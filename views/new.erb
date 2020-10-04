@@ -1,12 +1,13 @@
 <div class="container">
   <h2>Add new post</h2>
-
-  <div class="form-group">
-    <label>We will add new post here</label>
-    <textarea class="form-control" rows="3"></textarea>
-  </div>
-</br>
-  <div class="form-group">
-    <button type="button" class="btn btn-primary">Enter</button>
-  </div>
+  <form action="/new" method="POST">
+    <div class="form-group">
+      <label>We will add new post here</label>
+      <textarea name="content" class="form-control" rows="3" placeholder="Type post text here"></textarea>
+    </div>
+  </br>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Enter</button>
+    </div>
+  </form>
 </div>
