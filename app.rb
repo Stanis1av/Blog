@@ -21,6 +21,14 @@ configure do
     content TEXT,
     PRIMARY KEY(id AUTOINCREMENT)
   );'
+
+  @db.execute 'CREATE TABLE if not exists Comments
+  (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created_date DATE,
+    content TEXT,
+    post_id integer
+  );'
 end
 get '/' do
   @results = @db.execute 'select * from Posts order by id desc'
