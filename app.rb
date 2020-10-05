@@ -57,4 +57,11 @@ get '/details/:post_id' do
   erb :details
 end
 
+# Обработчик post запроса /details/...
+# (браузер отправляет данные на сервер, мы их принимаем)
+post '/details/:post_id' do
+    post_id = params[:post_id]
+    content = params[:content]
+    erb "We typed: #{content}, for post №#{post_id}."
+end
 
