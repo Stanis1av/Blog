@@ -7,3 +7,16 @@
     Added at <%= @row['created_date']%>
     <br/>
   </p>
+
+  <h4>Comments:</h4>
+
+<form action="/details/<%= @row['id']%>" method="POST" role="form">
+    <div class="form-group">
+
+      <textarea name="content" class="form-control" rows="6" placeholder="Type post text here"></textarea>
+    </div>
+  </br>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Enter</button>
+    </div>
+  </form>
