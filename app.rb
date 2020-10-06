@@ -41,13 +41,14 @@ end
 
 post '/new' do
   @content = params[:content]
+  @name_autor = params[:name_autor]
 
   if @content.length <= 0
     @error = 'Type post text'
     return erb :new
   end
 
-  @db.execute 'insert into Posts (content, created_date) values (?, datetime())', [@content]
+  @db.execute 'insert into Posts (name_autor, content, created_date) values (?, ?, datetime())', [@name_autor, @content]
 
   # Перенаправление на главную страницу
   redirect to '/'
