@@ -44,7 +44,7 @@ post '/new' do
   @content = params[:content]
   @name_autor = params[:name_autor]
 
-  if @content.length <= 0
+  if @content.length < 1
     @error = 'Type post text'
     return erb :new
   end
@@ -72,9 +72,14 @@ end
 # Обработчик post запроса /details/...
 # (браузер отправляет данные на сервер, мы их принимаем)
 post '/details/:post_id' do
+
     post_id = params[:post_id]
     content = params[:content]
 
+    # if content.length < 1
+    #   @error = 'Type text comment'
+    #   return erb :index
+    # end
       @db.execute 'insert into Comments
       (
         content,
