@@ -9,6 +9,7 @@ set :database, {adapter: "sqlite3", database: "blog.db"}
 class Post < ActiveRecord::Base
 end
 
+
 # configure do
 #   init_db
 #   @db.execute 'CREATE TABLE if not exists Posts
@@ -38,6 +39,9 @@ get '/new' do
 end
 
 post '/new' do
+  p = Post.new params[:post]
+  p.save
+  erb :new
   # @content = params[:content]
   # @name_autor = params[:name_autor]
 
