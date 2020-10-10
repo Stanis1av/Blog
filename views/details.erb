@@ -1,10 +1,12 @@
 <h2>Post details:</h2>
 <br/>
 <p>
-    <%= @row['content'] %>
+    <%= @results[:name_autor] %>
+      <br/>
+        <%= @results[:content] %>
       <br/>
       <br/>
-    Added at <%= @row['created_date']%>
+    Added at <%= @results[:created_at] %>
     <br/>
   </p>
 
@@ -12,17 +14,17 @@
   <br/>
   <% @comments.each do |comment| %>
     <p>
-      <%= comment['content']%>
+      <%= comment[:comment_content]%>
       <br/>
       <br/>
-      <span style="font-size: 75%; color: #999">Added at <%= comment['created_date']%></span>
+      <span style="font-size: 75%; color: #999">Added at <%= comment[:created_at]%></span>
     </p>
     <hr/>
   <% end %>
-<form action="/details/<%= @row['id']%>" method="POST" role="form">
+<form action="/details/<%= @results[:id]%>" method="POST" role="form">
     <div class="form-group">
 
-      <textarea name="content" class="form-control" rows="6" placeholder="Type post text here"></textarea>
+      <textarea name="comment[comment_content]" class="form-control" rows="6" placeholder="Type post text here"></textarea>
     </div>
   </br>
     <div class="form-group">

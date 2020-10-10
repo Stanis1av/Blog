@@ -7,6 +7,10 @@ require 'sinatra/activerecord'
 set :database, {adapter: "sqlite3", database: "blog.db"}
 
 class Post < ActiveRecord::Base
+    has_many :comments
+end
+
+class Comment < ActiveRecord::Base
 end
 
 
@@ -30,8 +34,8 @@ end
 #   );'
 # end
 get '/' do
-  # @results = @db.execute 'select * from Posts order by id desc'
-  # erb :index
+  @result = Post.order('created_at DESC')
+  erb :index
 end
 
 get '/new' do
@@ -56,23 +60,31 @@ post '/new' do
   # redirect to '/'
 end
 
-get '/details/:post_id' do
-  # # Получаю переменную из URL,ф
-  # post_id = params[:post_id]
-  # # Получаю список постов
-  # # у нас  только 1 пост
+get '/details/:id' do
+  # Получаю переменную из URL,ф
+  #post_id = params[:post_id]
+  # Получаю список постов
+  # у нас  только 1 пост
   # results = @db.execute 'select * from Posts where id = ?', [post_id]
-  # # Выбираю этот 1 пост в переменную @row
+  # Выбираю этот 1 пост в переменную @row
   # @row = results[0]
-  # # Выбираем комментарии для моего поста
+  # Выбираем комментарии для моего поста
   # @comments = @db.execute 'select * from Comments where post_id = ? order by id', [post_id]
-  # # Возвращаю пердставление details.erb
+  # Возвращаю пердставление details.erb
+  @results = Post.find(params[:id])
+
+  @comments = Comment.order('created_at DESC')
+
   erb :details
 end
 
 # Обработчик post запроса /details/...
 # (браузер отправляет данные на сервер, мы их принимаем)
-post '/details/:post_id' do
+post '/details/:id' do
+
+  c = Comment.new params[:comment]
+  c.save
+  @results = Post.find(params[:id])
 
   #   post_id = params[:post_id]
   #   content = params[:content]
@@ -96,6 +108,6 @@ post '/details/:post_id' do
 
 
   # # Перенаправление на главную страницу
-  # redirect to ('/details/' + post_id)
+  redirect to ('/details/' + @results[id])
 end
 

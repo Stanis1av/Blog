@@ -1,16 +1,16 @@
 <h2>Latest posts:</h2>
 <br/>
-<% @results.each do |details| %>
+<% @result.each do |details| %>
   <p>
-    <%= details['name_autor'] %>
+    <%= details.name_autor %>
     <br/>
-    <%= details['content'] %>
+    <%= details.content %>
       <br/>
       <br/>
-    Added at <%= details['created_date']%>
+    Added at <%= details.created_at %>
     <br/>
     <br/>
-    <a href="/details/<%= details['id']%>">Comments</a>
+    <a href="/details/<%= details[:id]%>">Comments</a>
   </p>
   <hr/>
 <% end %>
